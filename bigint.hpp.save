@@ -1,0 +1,20 @@
+/* 	Nafees Mahmood
+	CS 23001
+	Project 1-BigInt
+*/
+
+#ifndef BIGINT_HPP_
+#define BIGINT_HPP_
+
+#include <iostream>
+
+const int BIG_INT_SIZE = 100;
+
+class bigint{
+public:
+	bigint();	//default constructor
+	bigint(int num);	consttructor to initialize an int to a bigint
+	bigint(const char fakeNum[]); //constructor to initialize a char to a bigint
+
+	friend
+	

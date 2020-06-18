@@ -1,0 +1,19 @@
+//Nafees Mahmood
+//CS23001
+//Lab 4
+//File input output
+
+#include <iostream>
+#include<fstream>
+
+
+void charFunc(){
+  std::ifstream file("fileio-text.tx");
+  if(!file.is_open()){
+    std::cout << "Unable to open file\n";
+  }
+  else{
+    char ch;
+    file.get(ch);
+    
+    while(

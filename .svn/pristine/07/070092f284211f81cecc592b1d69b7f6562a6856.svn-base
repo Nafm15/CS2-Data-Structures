@@ -1,0 +1,6 @@
+#include "profile.hpp"
+profile foo_cpp("foo.cpp");
+
+void foo(int x) {foo-cpp.count(_LINE_, "foo");
+  ++x; foo_cpp.count(_LINE_);
+}

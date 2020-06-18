@@ -1,0 +1,72 @@
+//Nafees Mahmood
+//CS 23001
+//Project 1: Bigint
+//27 September 2018
+
+
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include "bigint.hpp"
+#include "bigint.cpp"
+
+
+int main(){
+  std::ifstream in("data1-1.txt");
+  if(!in){
+    std::cerr << "Could not open data1-2.txt,exiting." << std::endl;
+    exit(1);
+  }
+
+  
+  bigint num1;
+  bigint num2;
+  char colon;
+  bigint result;
+
+  in >> num1;
+  in >> colon;
+  in >> num2;
+  
+  std::cout << "\n";
+  std::cout << "Number 1 : " << num1 << "\n";
+  std::cout << "\n";
+  std::cout << "Number 2 : " << num2 << "\n";
+
+  result = num1 * num2;
+  std::cout << "\n" << "Number 1 * Number 2 : ";
+  std::cout << result << "\n";
+
+  while(!in.eof()){
+    //bigint num3;
+    //bigint num4;
+    //char colon;
+    bigint result1;
+
+    in >> colon;
+    if(colon != ';'){
+	in >> num1;
+	std::cout << "\n";
+	std::cout << "\n" << "Number 1 : " << num1 << "\n";
+	in >> colon;
+	if(colon != ';'){
+	    in >> num2;
+	    std::cout << "\n";
+	    std::cout << "Number 2 : " << num2 << "\n";
+	  }
+	  else{
+	    in >> colon;
+	  }
+	in >> colon;
+    }
+    else{
+      in >> colon;
+    }
+
+    result = num1 * num2;
+    std::cout << "\n" << "Number 1 * Number 2 : " << "\n";
+    std::cout << result << "\n";
+  }
+  in.close();
+  return 0;
+}

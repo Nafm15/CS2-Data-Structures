@@ -1,0 +1,28 @@
+//Nafees Mahmood
+//CS23001
+//Project 1
+//BigInt function declaratons
+//September 14 2018
+
+#ifndef BIGINT_H_
+#define BIGINT_H_
+
+#include <iostream>
+
+const int BIG_INT_SIZE = 100;
+
+class BigInt{
+public:
+	bigint(); 			//default constructor
+	bigint(int num); 		//constructor that initializes an int to a bigint
+	bigint(const char charNum[]); 	//constructor to initialize a char to a bigint
+
+	friend std::ostream& operator << (std::ostream& outStream, const bigint& rhs);
+	friend std::istream operator >> (std::istream& inStream, bigint& rhs);
+	friend bool operator == (const bigint& lhs, const bigint& rhs);
+	friend bool operator == (const bigint& lhs, const int&rhs);
+	friend bigint operator+(const bigint& rhs, const bigint& rhs);
+
+	int& operator[](int);
+	int operator[](int) const;
+

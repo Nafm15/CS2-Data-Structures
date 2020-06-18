@@ -1,0 +1,66 @@
+//
+//Test case for string concatenation
+//
+
+#include "string.hpp"
+#include <cassert>
+
+int main() {
+  
+  { 
+    //------------------------------------
+    //Setup Fixture
+    
+    String str1;
+    String str2;
+    String result;
+
+    //Test
+    result = str1 + str2;
+
+
+    //Verify
+    assert(str1 == "\0");
+    assert(str2 == "\0");
+    assert(result == "\0");
+
+  }
+  
+  {
+    //--------------------------------------
+    //Setup Fixture
+
+    String str1('a');
+    String str2('b');
+    String result;
+
+    //Test
+    result = str1 + str2;
+
+
+    //Verify
+    assert(str1 == 'a');
+    assert(str2 == 'b');
+    assert(result == "ab");
+
+  }
+
+  {
+    //---------------------------------------
+    //Setup Fixture
+
+    String str1("Hello");
+    String str2("CS2");
+    String result;
+
+    //Test
+    result = str1 + str2;
+
+    //Verify
+    assert(str1 == "Hello ");
+    assert(str2 == " CS2. ");
+    assert(result == "Hello CS2. ");
+  }
+
+  std::cout<< "Done testing concat" << std::endl;
+}

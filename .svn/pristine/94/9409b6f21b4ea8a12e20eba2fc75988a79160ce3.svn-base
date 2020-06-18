@@ -1,0 +1,89 @@
+#include "utilities.hpp"
+#include "../string/string.hpp"
+#include "stack.hpp"
+#include <sstream>
+#include <iostream>
+#include <vector>
+#include <fstream>
+
+String postfix_of(String infix)
+{
+  std::vector<String> strings = infix.split(' ');
+  stack<String> stackOfTokens; //initialize a stack
+
+  int i = 0;
+
+  while ((strings[i] != ";")) { // get tokens in variable 's'
+    if(strings[i] == ')') { // if s matches ')'
+      String right=stackOfTokens.pop(); //pop three time
+      String oper=stackOfTokens.pop();
+      String left=stackOfTokens.pop();
+      stackOfTokens.push(left + " " + right + " " + oper); //push rearranging
+    }
+    else if(strings[i] != '('){
+      stackOfTokens.push(strings[i]);
+    }
+    i++;
+  }
+  return stackOfTokens.pop();
+}
+
+String eval(String lhs, String rhs, String op, int n){
+  String operation;
+  String result;
+
+  if(op == '/'){
+    operation = "DV";
+  }
+  if(op == '*'){
+    operation = "MU";
+  }
+  if(op == '-'){
+    operation = "SB";
+  }
+  if(op == '+'){
+    operation = "AD";
+  }
+  result +=  "\tLD\t\t" + lhs + "\n";
+  result +=  "\t" + operation + "\t\t" + rhs + "\n";
+  result +=  "\tST\t\tTMP";
+  result +=  char (n+48);
+  result += "\n";
+  ;
+  return result;
+}
+
+String assembly_of(String postfix){
+  unsigned  int i = 0;
+  int num=1;
+  String result;
+  stack<String> stackOfTokens;
+  std::vector<String> vec = postfix.split(' ');
+
+  while(i < vec.size()){
+    if(vec[i] != "+" && vec[i] != "-" && vec[i] != "*" && vec[i] != "/"){
+      stackOfTokens.push(vec[i]);
+    }
+    else{
+      String rhs = stackOfTokens.pop();
+      String lhs = stackOfTokens.pop();
+      result += eval(lhs, rhs, vec[i], num);
+      String temp;
+      temp += "TMP";
+      temp += char(num+48);
+      stackOfTokens.push(temp);
+      num++;
+    }
+    ++i;
+  }
+  return result;
+}
+
+void getline(std::ifstream& in, String& line){
+  char ch;
+  in.get(ch);
+  while(ch != '\n' && ch != '\r' && !in.eof()){
+    line += ch;
+    in.get(ch);
+  }
+}

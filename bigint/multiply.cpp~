@@ -1,0 +1,16 @@
+//Nafees Mahmood
+//CS 23001
+//Project 1: Bigint
+//27 September 2018
+
+
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include "bigint.hpp"
+#include "bigint.cpp"
+
+
+int main(){
+  std::ifstream in("data1-1.txt");
+  if

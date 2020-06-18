@@ -1,0 +1,41 @@
+//
+//Nafees Mahmood
+//Project 2: string.cpp
+//
+//const int STRING_SIZE = 256
+//
+
+#include "string.hpp"
+#include <iostream>
+#include <cassert>
+
+
+
+String::String(){
+  stringSize=1;
+  str = new char[1];
+  str[0] = '\0';
+}
+
+String::String(char ch){
+  str = new char[2];
+  str[0] = ch;
+  str[1] = '\0';
+  stringSize = 2;
+}
+
+String::String(const char word[]){
+  int i = 0;
+  while (word[i] != '\0')
+    ++i;
+  str = new char[i+1];
+  stringSize = i+1;
+  
+  i = 0;
+  while (word[i] != '\0'){
+    str[i] = word[i];
+    i++;
+  }
+  str[i] = '\0';
+}
+

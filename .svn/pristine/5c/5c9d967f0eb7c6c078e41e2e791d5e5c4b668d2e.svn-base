@@ -1,0 +1,4 @@
+part1: 50
+ test_ctor_char.cpp:27: int main(): Assertion `result == "za"' failed.
+Also, you should change the name of the directory to lower-case string!
+fix and request regrading!

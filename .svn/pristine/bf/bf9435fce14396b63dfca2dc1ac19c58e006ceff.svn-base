@@ -1,0 +1,5 @@
+
+//
+This is the explanation for the sort_report lab
+
+The profile report I created for profiling lab shows a detailed report of which methods were called, how many times they were called and how long they took. The most called method is the bubble_sort and it had the longest running time because it checks two elements and then swaps them and then goes to next two elements. This continues till the loop ends. There are lots of unnecessary steps so thats why bubble sort takes a lot of time.

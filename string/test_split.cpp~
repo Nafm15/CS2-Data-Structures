@@ -1,0 +1,27 @@
+#include "string.hpp"
+#include <cassert>
+#include <iostream>
+
+
+int main(){
+  
+  {
+    String str = "asd fg hjkl";
+    std::vector<string> result;
+    result = str.split(' ');
+  }
+
+  {
+    String str = "-a--b--";
+    std::vector<string> result;
+    result = str.split('-');
+  }
+
+  {
+    String str = "-a--b-";
+    std::vector<string> result;
+    result = str.split('-');
+  }
+
+  std::cout << "Done testing split" << std::endl;
+}

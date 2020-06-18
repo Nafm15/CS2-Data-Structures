@@ -1,0 +1,32 @@
+//
+//Tet cases for char constructor
+//
+
+#include <iostream>
+#include <cassert>
+#include "string.hpp"
+
+int main(){
+  
+  {
+    String str1('a');
+    assert(str1 == "a");
+  }
+
+  {
+    String str('z');
+    assert(str == "z");
+  }
+
+  {
+    String str('z');
+    String str1('a');
+    String result = str + str1;
+    assert(str == "z");
+    assert(str1 == "a");
+    assert(result == "za");
+  }
+
+  std::cout<< "Done testing char constructor" <<std::endl;
+  return 0;
+}

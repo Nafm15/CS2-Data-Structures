@@ -1,0 +1,5 @@
+
+//
+This is the explanation for the sort_report lab
+
+The profile report I created for profiling lab shows a detailed report of which methods were called, how many times they were called and how long they took. The most called method is the bubble_sort and it had the longest running time of 4.16 seconds and is around 98 percent of the running time of the whole program.

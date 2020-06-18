@@ -1,0 +1,217 @@
+//
+//Nafees Mahmood
+//Project 2: string.cpp
+//
+//const int STRING_SIZE = 256
+//
+
+#include "string.hpp"
+#include <iostream>
+#include <cassert>
+
+
+
+String::String(){
+  stringSize=1;
+  str = new char[1];
+  str[0] = '\0';
+}
+
+String::String(char ch){
+  str = new char[2];
+  str[0] = ch;
+  str[1] = '\0';
+  stringSize = 2;
+}
+
+String::String(const char word[]){
+  int i = 0;
+  while (word[i] != '\0')
+    ++i;
+  str = new char[i+1];
+  stringSize = i+1;
+  
+  i = 0;
+  while (word[i] != '\0'){
+    str[i] = word[i];
+    i++;
+  }
+  str[i] = '\0';
+}
+
+String::String(const String& a){
+  stringSize = a.stringSize;
+  str = new char[stringSize];
+  int i = 0;
+  while(a.str[i] != 0){
+    str[i] = a.str[i];
+    i++;
+  }
+  str[i] = 0;
+}
+
+String::~String(){
+  delete[] str;
+}
+
+void String::swap(String& rhs){
+  char *temp = str;
+  int temp_size = stringSize;
+
+  str = rhs.str;
+  stringSize = rhs.stringSize;
+
+  rhs.str = temp;
+  rhs.stringSize = temp_size;
+}
+
+String& String::operator=(String rhs){
+  swap(rhs);
+  return *this;
+}
+
+char& String::operator[](int i){
+  assert(i >= 0);
+  assert(i <= stringSize);
+  return str[i];
+}
+
+char String::operator[](int i) const{
+  assert(i >= 0);
+  assert(i <= stringSize);
+  return str[i];
+}
+
+int String::length() const{  //includes null terminator
+  int i = 0;
+  while(str[i] != '\0'){
+    i++;
+  }
+  return i;
+}
+
+int String::capacity() const{  //does not include null terminator
+  return strinSize-1;
+}
+
+String String::operator+(const String& rhs) const{  //concat
+  int offset = length();
+  int c = rhs.length() + length() + 1;
+  String result(c);
+  int i = 0;
+  while(str[i] != 0){
+    result.str[i] = str[i];
+    ++i;
+  }
+  i = 0;
+  while(rhs.str[i] != 0){
+    result.str[offset + i] = rhs.str[i];
+    ++i;
+  }
+  return result;
+}
+
+String& String::operator+=(const String& rhs){
+  int offset = length();
+  int i = 0;
+  while(rhs.str[i] != 0){
+    str[offset+i] = rhs.str[i];
+    ++i;
+  }
+  str[offset+i] = 0;
+  return *this;
+}
+
+bool String::operator==(const String& rhs) const{
+  int i = 0;
+  while(str[i] != '\0' && rhs.str[i] != '\0'){
+    if(str[i] != rhs.str[i]){
+      return false;
+    }
+    ++i;
+  }
+  return str[i] == rhs.str[i];
+}
+
+bool String:: operator<(const String& rhs) const{
+  int i = 0;
+  while(str[i] != 0 && rhs.str[i] != 0 && str[i] == rhs.str[i]){
+    ++i;
+  }
+  if((str[i] == 0) && (rhs.str[i] == 0))
+    return false;
+  if(str[i] == 0)
+    return true;
+  if(str[i] < rhs.str[i])
+    return true;
+  return false;
+}
+
+//---------------------------------------------------------
+
+String operator+ (const char lhs[], const String& rhs){
+  return(String(lhs)+rhs);
+}
+
+String operator+ (char lhs[], const String& rhs){
+  return(String(lhs)+rhs);
+}
+
+bool operator== (const char lhs[], const String& rhs){
+  return(lhs=rhs);
+}
+
+bool operator== (char lhs[], const String& rhs){
+  return(lhs==rhs);
+}
+
+
+bool operator<(const char* lhs, const String& rhs){
+  return String(lhs)<rhs;
+}
+
+bool operator<(char lhs, const String& rhs){
+  return String(lhs)<rhs;
+}
+
+bool operator<=(const String& lhs, const String& rhs){
+  return ((lhs<rhs) || (lhs==rhs));
+}
+
+bool operator!=(const String& lhs, const String& rhs){
+  return (!(lhs==rhs));
+}
+
+bool operator>=(const String& lhs, const String& rhs){
+  return (!(lhs<rhs));
+}
+
+bool operator>(const String& lhs, const String& rhs){
+  return (rhs<lhs);
+}
+
+//------------------------------------------------------
+
+
+String String::substr(int start int end) const{  //returns the sub-string from start to end position (inclusive)
+  if(start<0)
+    start = 0;
+  if(start > end)
+    return String();
+  if(start >= length())
+    return String();
+
+  String result(end - start + 1);
+  int i = start;
+  while(str[i] == 0){
+    result.str[i-start] = 0;
+    ++i;
+  }
+  i = start;
+  while((i < end) && (str[i] != 0)){
+    result.str[i-start] = str[i];
+    ++i;
+  }
+  return result;
+}
+

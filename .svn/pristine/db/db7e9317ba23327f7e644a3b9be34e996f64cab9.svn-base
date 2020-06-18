@@ -1,0 +1,42 @@
+//
+//Testing Equal operator
+//
+
+#include "string.hpp"
+#include <cassert>
+#include <iostream>
+
+int main() {
+  
+  {
+    String str1("abc");
+    String str2("a");
+    assert(!(str1 == str2));
+    std::cout<<str1;
+    std::cout<<" != ";
+    std::cout<<str2;
+    std::cout<<std::endl;
+  }
+
+  {
+    String str1("a");
+    String str2("abc");
+    assert(!(str1 == str2));
+    std::cout<<str1;
+    std::cout<<" != ";
+    std::cout<<str2;
+    std::cout<<std::endl;
+  }
+
+  {
+    String str1("abc");
+    String str2("abc");
+    assert(str1 == str2);
+    std::cout<<str1;
+    std::cout<<" == ";
+    std::cout<<str2;
+    std::cout<<std::endl;
+  }
+
+  std::cout<<"Done testing operator== " << std::endl;
+}

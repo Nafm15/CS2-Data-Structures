@@ -1,0 +1,13 @@
+part1: 90
+output is not correct, fix for a regrade!
+
+
+
+part2: 90
+add.cpp not working
+fix for a regrade
+
+
+part3: 85 [regraded - multiply.cpp does not work]
+does not compile
+fix for regrade

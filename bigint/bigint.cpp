@@ -1,0 +1,151 @@
+//
+//Nafees Mahmood
+//CS 23001 Project 1
+//bigint.cpp
+//September 15 2018
+//
+
+#include "bigint.hpp"
+#include "iostream"
+#include "fstream"
+
+bigint::bigint(){       //Default constructor to initialize bigint to zero
+  for(int i=0; i<MAX_SIZE; i++){
+    digit[i]=0;
+  }
+}
+
+bigint::bigint(int x){  //Storing a number in the array
+  for(int i = 0; i<MAX_SIZE; ++i){
+    digit[i]=0;
+  }
+  int c=0;
+  while(x!='\0'){
+    digit[c]=x%10;
+    c++;
+    x=x/10;
+  }
+}
+
+bigint::bigint(const char cdigit[]){  //length/convert/store
+  int length=0;
+  int temp=0;
+  for(int i=0; i<MAX_SIZE; ++i){
+    digit[i]=0;
+  }
+  while(cdigit[length]!='\0'){  //finding the length of the character number
+    ++length;
+  }
+  --length;
+  temp=length;
+  for(int i=0; i<MAX_SIZE && temp>=0; ++i){  //storring the character array in the bigint array
+    int num=cdigit[temp]-'0';   //converting the characters ti int
+    digit[i]=num;
+    temp=temp-1;
+  }
+}
+
+bool bigint::operator == (const bigint& rhs) const{  //comparing two bigint arrays and return true if they are equal
+  for(int i=0; i<MAX_SIZE; i++){
+    if(digit[i]!=rhs.digit[i]){
+      return false;
+    }
+  }
+  return true;
+}
+
+void bigint::debug_print(std::ostream& out) const{  //printing all the numbers
+  out << " | ";
+  for (int i=MAX_SIZE-1;i>=0; --i){
+    out <<digit[i]<< " | ";
+  }
+}
+
+std::ostream& operator<<(std::ostream& out,const bigint& a){
+  int c=0;
+
+  for (int i=MAX_SIZE-1;i>=0;--i){
+    if(a.digit[i] == 0){
+      i=i-1;
+    }
+    else{
+      out << a.digit[i];
+      c = c + 1;
+      if(c == 50){
+	out << "\n";
+	c=0;
+      }
+    }
+  }
+  return out;
+}
+
+
+std::istream& operator>>(std::istream& in, bigint& rhs){
+
+  int i=0;
+  char ch;
+  in >>ch;
+  while(ch!=';'){
+    rhs.digit[i] = ch - 48;
+    ++i;
+    in>>ch;
+  }
+
+  //in >> rhs.ch;
+  return in;
+}
+
+bigint bigint::operator+(const bigint& rhs) const{
+  bigint result;
+  int carry = 0;   //carry starting value 0;
+  for (int i=0; i<MAX_SIZE; ++i){
+    result.digit[i] = digit[i]+rhs.digit[i]+carry;
+    if(result.digit[i] > 9){
+      carry = result.digit[i]/10;  //45%10=5 ? wrong need 45/10=4 so carry=4
+    }
+    else {
+      carry = 0;
+    }
+    result.digit[i] = result.digit[i]%10;
+  }
+  return result;
+}
+
+
+int bigint::operator[](const int x){
+  return digit[x];
+}
+
+
+bigint bigint::timesDigit(int x){
+
+  bigint result;
+  int carry = 0;
+  int product=0;  //rem
+
+  for(int i=0; i<MAX_SIZE; ++i){
+    product = (digit[i] * x) + carry;
+    carry = product / 10;
+    result.digit[i] = product % 10;
+  }
+  return result;
+}
+
+
+bigint bigint::times10(int x){
+  bigint temp;
+  for(int i = 0; i<MAX_SIZE-x; ++i){
+    temp.digit[i+x] = digit[i];
+  }
+  return temp;
+}
+
+bigint bigint::operator*(bigint rhs){
+  bigint product = 0;
+  for(int i = 0; i<MAX_SIZE; ++i){
+    product = product + (timesDigit(rhs.digit[i])).times10(i);
+  }
+  return product;
+}
+

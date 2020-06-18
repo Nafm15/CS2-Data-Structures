@@ -1,0 +1,18 @@
+part1: 90[regraded]
+test_ctor_char.cpp:27: int main(): Assertion `result == "za"' failed.
+Also, you should change the name of the directory to lower-case string!
+fix and request regrading!
+
+
+part2: 100
+Awesome!
+
+
+part3: 60
+no test for split
+testoracle_split does not pass
+
+tips: use substring and findchar in split.
+
+part4: 87 [regraded - bytes are not correct, negative values]
+segfaults

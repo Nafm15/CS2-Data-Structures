@@ -1,0 +1,31 @@
+//
+//Nafees Mahmood
+//CS 23001 Project 1
+//bigint.cpp
+//September 15 2018
+//
+
+#include "bigint.hpp"
+#include "fstream"
+#include "iostream"
+
+bigint::bigint(){       //Default constructor to initialize bigint to zero
+  for(int i=0; i<BIG_INT_SIZE; ++i){
+    bigIntArray[i]=0;
+  }
+}
+
+bigint::bigint(int x){  //Storing a number in the array
+  for(int i=0; i<BIG_INT_SIZE; ++i){
+    bigIntArray[i]=0;
+  }
+
+  int c=0;
+  while(x!=0){
+    bigIntArray[c]=x%10;
+    ++c;
+    x=x/10;
+  }
+}
+
+
